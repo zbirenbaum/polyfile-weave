@@ -16,11 +16,11 @@ from .magic import MagicMatcher, Match as MagicMatch, MatchContext, TestResult
 
 if sys.version_info >= (3, 10):
     from importlib.metadata import version
-    __version__: str = version("polyfile")
+    __version__: str = version("polyfile_weave")
     del version
 else:
     import pkg_resources
-    __version__ = pkg_resources.require("polyfile")[0].version
+    __version__ = pkg_resources.require("polyfile_weave")[0].version
     del pkg_resources
 mod_year = localtime(Path(__file__).stat().st_mtime).tm_year
 __copyright__: str = f"Copyright ©{mod_year} Trail of Bits"
