@@ -27,7 +27,7 @@ else:
     KAITAI_COMPILER_NAME = "kaitai-struct-compiler"
 
 
-COMPILER_DIR = Path(__file__).absolute().parent / "kaitai-struct-compiler-0.9"
+COMPILER_DIR = Path(__file__).absolute().parent / "kaitai-struct-compiler-0.11"
 COMPILER_BIN_DIR = COMPILER_DIR / "bin"
 COMPILER_BIN = COMPILER_BIN_DIR / KAITAI_COMPILER_NAME
 
@@ -59,8 +59,8 @@ class CompiledKSY:
 
 
 def install_compiler():
-    resp = urlopen("https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/0.9/"
-                   "kaitai-struct-compiler-0.9.zip")
+    resp = urlopen("https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/0.11/"
+                   "kaitai-struct-compiler-0.11.zip")
     zipfile = ZipFile(BytesIO(resp.read()))
     COMPILER_DIR.mkdir(exist_ok=True)
     zipfile.extractall(COMPILER_DIR.parent)

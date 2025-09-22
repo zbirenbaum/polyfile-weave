@@ -1,14 +1,14 @@
 # This is a generated file! Please edit source .ksy file and use kaitai-struct-compiler to rebuild
+# type: ignore
 
-from pkg_resources import parse_version
 import kaitaistruct
 from kaitaistruct import KaitaiStruct, KaitaiStream, BytesIO
-from enum import Enum
+from enum import IntEnum
 import collections
 
 
-if parse_version(kaitaistruct.__version__) < parse_version('0.9'):
-    raise Exception("Incompatible Kaitai Struct Python API: 0.9 or later is required, but you have %s" % (kaitaistruct.__version__))
+if getattr(kaitaistruct, 'API_VERSION', (0, 9)) < (0, 11):
+    raise Exception("Incompatible Kaitai Struct Python API: 0.11 or later is required, but you have %s" % (kaitaistruct.__version__))
 
 class RenderwareBinaryStream(KaitaiStruct):
     """
@@ -16,7 +16,7 @@ class RenderwareBinaryStream(KaitaiStruct):
        Source - https://gtamods.com/wiki/RenderWare_binary_stream_file
     """
 
-    class Sections(Enum):
+    class Sections(IntEnum):
         struct = 1
         string = 2
         extension = 3
@@ -186,9 +186,9 @@ class RenderwareBinaryStream(KaitaiStruct):
         unused_16 = 39056127
     SEQ_FIELDS = ["code", "size", "library_id_stamp", "body"]
     def __init__(self, _io, _parent=None, _root=None):
-        self._io = _io
+        super(RenderwareBinaryStream, self).__init__(_io)
         self._parent = _parent
-        self._root = _root if _root else self
+        self._root = _root or self
         self._debug = collections.defaultdict(dict)
 
     def _read(self):
@@ -204,244 +204,424 @@ class RenderwareBinaryStream(KaitaiStruct):
         self._debug['body']['start'] = self._io.pos()
         _on = self.code
         if _on == RenderwareBinaryStream.Sections.atomic:
-            self._raw_body = self._io.read_bytes(self.size)
-            _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
-            self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
-            self.body._read()
-        elif _on == RenderwareBinaryStream.Sections.geometry:
-            self._raw_body = self._io.read_bytes(self.size)
-            _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
-            self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
-            self.body._read()
-        elif _on == RenderwareBinaryStream.Sections.texture_dictionary:
-            self._raw_body = self._io.read_bytes(self.size)
-            _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
-            self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
-            self.body._read()
-        elif _on == RenderwareBinaryStream.Sections.geometry_list:
-            self._raw_body = self._io.read_bytes(self.size)
-            _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
-            self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
-            self.body._read()
-        elif _on == RenderwareBinaryStream.Sections.texture_native:
+            pass
             self._raw_body = self._io.read_bytes(self.size)
             _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
             self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
             self.body._read()
         elif _on == RenderwareBinaryStream.Sections.clump:
+            pass
             self._raw_body = self._io.read_bytes(self.size)
             _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
             self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
             self.body._read()
         elif _on == RenderwareBinaryStream.Sections.frame_list:
+            pass
+            self._raw_body = self._io.read_bytes(self.size)
+            _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
+            self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
+            self.body._read()
+        elif _on == RenderwareBinaryStream.Sections.geometry:
+            pass
+            self._raw_body = self._io.read_bytes(self.size)
+            _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
+            self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
+            self.body._read()
+        elif _on == RenderwareBinaryStream.Sections.geometry_list:
+            pass
+            self._raw_body = self._io.read_bytes(self.size)
+            _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
+            self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
+            self.body._read()
+        elif _on == RenderwareBinaryStream.Sections.texture_dictionary:
+            pass
+            self._raw_body = self._io.read_bytes(self.size)
+            _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
+            self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
+            self.body._read()
+        elif _on == RenderwareBinaryStream.Sections.texture_native:
+            pass
             self._raw_body = self._io.read_bytes(self.size)
             _io__raw_body = KaitaiStream(BytesIO(self._raw_body))
             self.body = RenderwareBinaryStream.ListWithHeader(_io__raw_body, self, self._root)
             self.body._read()
         else:
+            pass
             self.body = self._io.read_bytes(self.size)
         self._debug['body']['end'] = self._io.pos()
 
-    class StructClump(KaitaiStruct):
+
+    def _fetch_instances(self):
+        pass
+        _on = self.code
+        if _on == RenderwareBinaryStream.Sections.atomic:
+            pass
+            self.body._fetch_instances()
+        elif _on == RenderwareBinaryStream.Sections.clump:
+            pass
+            self.body._fetch_instances()
+        elif _on == RenderwareBinaryStream.Sections.frame_list:
+            pass
+            self.body._fetch_instances()
+        elif _on == RenderwareBinaryStream.Sections.geometry:
+            pass
+            self.body._fetch_instances()
+        elif _on == RenderwareBinaryStream.Sections.geometry_list:
+            pass
+            self.body._fetch_instances()
+        elif _on == RenderwareBinaryStream.Sections.texture_dictionary:
+            pass
+            self.body._fetch_instances()
+        elif _on == RenderwareBinaryStream.Sections.texture_native:
+            pass
+            self.body._fetch_instances()
+        else:
+            pass
+
+    class Frame(KaitaiStruct):
         """
         .. seealso::
-           Source - https://gtamods.com/wiki/RpClump
+           Source - https://gtamods.com/wiki/Frame_List_(RW_Section)#Structure
         """
-        SEQ_FIELDS = ["num_atomics", "num_lights", "num_cameras"]
+        SEQ_FIELDS = ["rotation_matrix", "position", "cur_frame_idx", "matrix_creation_flags"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.Frame, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
-            self._debug['num_atomics']['start'] = self._io.pos()
-            self.num_atomics = self._io.read_u4le()
-            self._debug['num_atomics']['end'] = self._io.pos()
-            if self._parent.version >= 208896:
-                self._debug['num_lights']['start'] = self._io.pos()
-                self.num_lights = self._io.read_u4le()
-                self._debug['num_lights']['end'] = self._io.pos()
+            self._debug['rotation_matrix']['start'] = self._io.pos()
+            self.rotation_matrix = RenderwareBinaryStream.Matrix(self._io, self, self._root)
+            self.rotation_matrix._read()
+            self._debug['rotation_matrix']['end'] = self._io.pos()
+            self._debug['position']['start'] = self._io.pos()
+            self.position = RenderwareBinaryStream.Vector3d(self._io, self, self._root)
+            self.position._read()
+            self._debug['position']['end'] = self._io.pos()
+            self._debug['cur_frame_idx']['start'] = self._io.pos()
+            self.cur_frame_idx = self._io.read_s4le()
+            self._debug['cur_frame_idx']['end'] = self._io.pos()
+            self._debug['matrix_creation_flags']['start'] = self._io.pos()
+            self.matrix_creation_flags = self._io.read_u4le()
+            self._debug['matrix_creation_flags']['end'] = self._io.pos()
 
-            if self._parent.version >= 208896:
-                self._debug['num_cameras']['start'] = self._io.pos()
-                self.num_cameras = self._io.read_u4le()
-                self._debug['num_cameras']['end'] = self._io.pos()
 
-
-
-    class StructGeometry(KaitaiStruct):
-        """
-        .. seealso::
-           Source - https://gtamods.com/wiki/RpGeometry
-        """
-        SEQ_FIELDS = ["format", "num_triangles", "num_vertices", "num_morph_targets", "surf_prop", "geometry", "morph_targets"]
-        def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
-            self._parent = _parent
-            self._root = _root if _root else self
-            self._debug = collections.defaultdict(dict)
-
-        def _read(self):
-            self._debug['format']['start'] = self._io.pos()
-            self.format = self._io.read_u4le()
-            self._debug['format']['end'] = self._io.pos()
-            self._debug['num_triangles']['start'] = self._io.pos()
-            self.num_triangles = self._io.read_u4le()
-            self._debug['num_triangles']['end'] = self._io.pos()
-            self._debug['num_vertices']['start'] = self._io.pos()
-            self.num_vertices = self._io.read_u4le()
-            self._debug['num_vertices']['end'] = self._io.pos()
-            self._debug['num_morph_targets']['start'] = self._io.pos()
-            self.num_morph_targets = self._io.read_u4le()
-            self._debug['num_morph_targets']['end'] = self._io.pos()
-            if self._parent.version < 212992:
-                self._debug['surf_prop']['start'] = self._io.pos()
-                self.surf_prop = RenderwareBinaryStream.SurfaceProperties(self._io, self, self._root)
-                self.surf_prop._read()
-                self._debug['surf_prop']['end'] = self._io.pos()
-
-            if not (self.is_native):
-                self._debug['geometry']['start'] = self._io.pos()
-                self.geometry = RenderwareBinaryStream.GeometryNonNative(self._io, self, self._root)
-                self.geometry._read()
-                self._debug['geometry']['end'] = self._io.pos()
-
-            self._debug['morph_targets']['start'] = self._io.pos()
-            self.morph_targets = [None] * (self.num_morph_targets)
-            for i in range(self.num_morph_targets):
-                if not 'arr' in self._debug['morph_targets']:
-                    self._debug['morph_targets']['arr'] = []
-                self._debug['morph_targets']['arr'].append({'start': self._io.pos()})
-                _t_morph_targets = RenderwareBinaryStream.MorphTarget(self._io, self, self._root)
-                _t_morph_targets._read()
-                self.morph_targets[i] = _t_morph_targets
-                self._debug['morph_targets']['arr'][i]['end'] = self._io.pos()
-
-            self._debug['morph_targets']['end'] = self._io.pos()
-
-        @property
-        def num_uv_layers_raw(self):
-            if hasattr(self, '_m_num_uv_layers_raw'):
-                return self._m_num_uv_layers_raw if hasattr(self, '_m_num_uv_layers_raw') else None
-
-            self._m_num_uv_layers_raw = ((self.format & 16711680) >> 16)
-            return self._m_num_uv_layers_raw if hasattr(self, '_m_num_uv_layers_raw') else None
-
-        @property
-        def is_textured(self):
-            if hasattr(self, '_m_is_textured'):
-                return self._m_is_textured if hasattr(self, '_m_is_textured') else None
-
-            self._m_is_textured = (self.format & 4) != 0
-            return self._m_is_textured if hasattr(self, '_m_is_textured') else None
-
-        @property
-        def is_native(self):
-            if hasattr(self, '_m_is_native'):
-                return self._m_is_native if hasattr(self, '_m_is_native') else None
-
-            self._m_is_native = (self.format & 16777216) != 0
-            return self._m_is_native if hasattr(self, '_m_is_native') else None
-
-        @property
-        def num_uv_layers(self):
-            if hasattr(self, '_m_num_uv_layers'):
-                return self._m_num_uv_layers if hasattr(self, '_m_num_uv_layers') else None
-
-            self._m_num_uv_layers = ((2 if self.is_textured2 else (1 if self.is_textured else 0)) if self.num_uv_layers_raw == 0 else self.num_uv_layers_raw)
-            return self._m_num_uv_layers if hasattr(self, '_m_num_uv_layers') else None
-
-        @property
-        def is_textured2(self):
-            if hasattr(self, '_m_is_textured2'):
-                return self._m_is_textured2 if hasattr(self, '_m_is_textured2') else None
-
-            self._m_is_textured2 = (self.format & 128) != 0
-            return self._m_is_textured2 if hasattr(self, '_m_is_textured2') else None
-
-        @property
-        def is_prelit(self):
-            if hasattr(self, '_m_is_prelit'):
-                return self._m_is_prelit if hasattr(self, '_m_is_prelit') else None
-
-            self._m_is_prelit = (self.format & 8) != 0
-            return self._m_is_prelit if hasattr(self, '_m_is_prelit') else None
+        def _fetch_instances(self):
+            pass
+            self.rotation_matrix._fetch_instances()
+            self.position._fetch_instances()
 
 
     class GeometryNonNative(KaitaiStruct):
         SEQ_FIELDS = ["prelit_colors", "uv_layers", "triangles"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.GeometryNonNative, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
             if self._parent.is_prelit:
+                pass
                 self._debug['prelit_colors']['start'] = self._io.pos()
-                self.prelit_colors = [None] * (self._parent.num_vertices)
+                self._debug['prelit_colors']['arr'] = []
+                self.prelit_colors = []
                 for i in range(self._parent.num_vertices):
-                    if not 'arr' in self._debug['prelit_colors']:
-                        self._debug['prelit_colors']['arr'] = []
                     self._debug['prelit_colors']['arr'].append({'start': self._io.pos()})
                     _t_prelit_colors = RenderwareBinaryStream.Rgba(self._io, self, self._root)
-                    _t_prelit_colors._read()
-                    self.prelit_colors[i] = _t_prelit_colors
+                    try:
+                        _t_prelit_colors._read()
+                    finally:
+                        self.prelit_colors.append(_t_prelit_colors)
                     self._debug['prelit_colors']['arr'][i]['end'] = self._io.pos()
 
                 self._debug['prelit_colors']['end'] = self._io.pos()
 
             self._debug['uv_layers']['start'] = self._io.pos()
-            self.uv_layers = [None] * (self._parent.num_uv_layers)
+            self._debug['uv_layers']['arr'] = []
+            self.uv_layers = []
             for i in range(self._parent.num_uv_layers):
-                if not 'arr' in self._debug['uv_layers']:
-                    self._debug['uv_layers']['arr'] = []
                 self._debug['uv_layers']['arr'].append({'start': self._io.pos()})
                 _t_uv_layers = RenderwareBinaryStream.UvLayer(self._parent.num_vertices, self._io, self, self._root)
-                _t_uv_layers._read()
-                self.uv_layers[i] = _t_uv_layers
+                try:
+                    _t_uv_layers._read()
+                finally:
+                    self.uv_layers.append(_t_uv_layers)
                 self._debug['uv_layers']['arr'][i]['end'] = self._io.pos()
 
             self._debug['uv_layers']['end'] = self._io.pos()
             self._debug['triangles']['start'] = self._io.pos()
-            self.triangles = [None] * (self._parent.num_triangles)
+            self._debug['triangles']['arr'] = []
+            self.triangles = []
             for i in range(self._parent.num_triangles):
-                if not 'arr' in self._debug['triangles']:
-                    self._debug['triangles']['arr'] = []
                 self._debug['triangles']['arr'].append({'start': self._io.pos()})
                 _t_triangles = RenderwareBinaryStream.Triangle(self._io, self, self._root)
-                _t_triangles._read()
-                self.triangles[i] = _t_triangles
+                try:
+                    _t_triangles._read()
+                finally:
+                    self.triangles.append(_t_triangles)
                 self._debug['triangles']['arr'][i]['end'] = self._io.pos()
 
             self._debug['triangles']['end'] = self._io.pos()
 
 
-    class StructGeometryList(KaitaiStruct):
+        def _fetch_instances(self):
+            pass
+            if self._parent.is_prelit:
+                pass
+                for i in range(len(self.prelit_colors)):
+                    pass
+                    self.prelit_colors[i]._fetch_instances()
+
+
+            for i in range(len(self.uv_layers)):
+                pass
+                self.uv_layers[i]._fetch_instances()
+
+            for i in range(len(self.triangles)):
+                pass
+                self.triangles[i]._fetch_instances()
+
+
+
+    class ListWithHeader(KaitaiStruct):
+        """Typical structure used by many data types in RenderWare binary
+        stream. Substream contains a list of binary stream entries,
+        first entry always has type "struct" and carries some specific
+        binary data it in, determined by the type of parent. All other
+        entries, beside the first one, are normal, self-describing
+        records.
         """
-        .. seealso::
-           Source - https://gtamods.com/wiki/Geometry_List_(RW_Section)#Structure
-        """
-        SEQ_FIELDS = ["num_geometries"]
+        SEQ_FIELDS = ["code", "header_size", "library_id_stamp", "header", "entries"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.ListWithHeader, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
-            self._debug['num_geometries']['start'] = self._io.pos()
-            self.num_geometries = self._io.read_u4le()
-            self._debug['num_geometries']['end'] = self._io.pos()
+            self._debug['code']['start'] = self._io.pos()
+            self.code = self._io.read_bytes(4)
+            self._debug['code']['end'] = self._io.pos()
+            if not self.code == b"\x01\x00\x00\x00":
+                raise kaitaistruct.ValidationNotEqualError(b"\x01\x00\x00\x00", self.code, self._io, u"/types/list_with_header/seq/0")
+            self._debug['header_size']['start'] = self._io.pos()
+            self.header_size = self._io.read_u4le()
+            self._debug['header_size']['end'] = self._io.pos()
+            self._debug['library_id_stamp']['start'] = self._io.pos()
+            self.library_id_stamp = self._io.read_u4le()
+            self._debug['library_id_stamp']['end'] = self._io.pos()
+            self._debug['header']['start'] = self._io.pos()
+            _on = self._parent.code
+            if _on == RenderwareBinaryStream.Sections.atomic:
+                pass
+                self._raw_header = self._io.read_bytes(self.header_size)
+                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
+                self.header = RenderwareBinaryStream.StructAtomic(_io__raw_header, self, self._root)
+                self.header._read()
+            elif _on == RenderwareBinaryStream.Sections.clump:
+                pass
+                self._raw_header = self._io.read_bytes(self.header_size)
+                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
+                self.header = RenderwareBinaryStream.StructClump(_io__raw_header, self, self._root)
+                self.header._read()
+            elif _on == RenderwareBinaryStream.Sections.frame_list:
+                pass
+                self._raw_header = self._io.read_bytes(self.header_size)
+                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
+                self.header = RenderwareBinaryStream.StructFrameList(_io__raw_header, self, self._root)
+                self.header._read()
+            elif _on == RenderwareBinaryStream.Sections.geometry:
+                pass
+                self._raw_header = self._io.read_bytes(self.header_size)
+                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
+                self.header = RenderwareBinaryStream.StructGeometry(_io__raw_header, self, self._root)
+                self.header._read()
+            elif _on == RenderwareBinaryStream.Sections.geometry_list:
+                pass
+                self._raw_header = self._io.read_bytes(self.header_size)
+                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
+                self.header = RenderwareBinaryStream.StructGeometryList(_io__raw_header, self, self._root)
+                self.header._read()
+            elif _on == RenderwareBinaryStream.Sections.texture_dictionary:
+                pass
+                self._raw_header = self._io.read_bytes(self.header_size)
+                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
+                self.header = RenderwareBinaryStream.StructTextureDictionary(_io__raw_header, self, self._root)
+                self.header._read()
+            else:
+                pass
+                self.header = self._io.read_bytes(self.header_size)
+            self._debug['header']['end'] = self._io.pos()
+            self._debug['entries']['start'] = self._io.pos()
+            self._debug['entries']['arr'] = []
+            self.entries = []
+            i = 0
+            while not self._io.is_eof():
+                self._debug['entries']['arr'].append({'start': self._io.pos()})
+                _t_entries = RenderwareBinaryStream(self._io, self, self._root)
+                try:
+                    _t_entries._read()
+                finally:
+                    self.entries.append(_t_entries)
+                self._debug['entries']['arr'][len(self.entries) - 1]['end'] = self._io.pos()
+                i += 1
+
+            self._debug['entries']['end'] = self._io.pos()
+
+
+        def _fetch_instances(self):
+            pass
+            _on = self._parent.code
+            if _on == RenderwareBinaryStream.Sections.atomic:
+                pass
+                self.header._fetch_instances()
+            elif _on == RenderwareBinaryStream.Sections.clump:
+                pass
+                self.header._fetch_instances()
+            elif _on == RenderwareBinaryStream.Sections.frame_list:
+                pass
+                self.header._fetch_instances()
+            elif _on == RenderwareBinaryStream.Sections.geometry:
+                pass
+                self.header._fetch_instances()
+            elif _on == RenderwareBinaryStream.Sections.geometry_list:
+                pass
+                self.header._fetch_instances()
+            elif _on == RenderwareBinaryStream.Sections.texture_dictionary:
+                pass
+                self.header._fetch_instances()
+            else:
+                pass
+            for i in range(len(self.entries)):
+                pass
+                self.entries[i]._fetch_instances()
+
+
+        @property
+        def version(self):
+            if hasattr(self, '_m_version'):
+                return self._m_version
+
+            self._m_version = ((self.library_id_stamp >> 14 & 261888) + 196608 | self.library_id_stamp >> 16 & 63 if self.library_id_stamp & 4294901760 != 0 else self.library_id_stamp << 8)
+            return getattr(self, '_m_version', None)
+
+
+    class Matrix(KaitaiStruct):
+        """
+        .. seealso::
+           Source - https://gtamods.com/wiki/Frame_List_(RW_Section)#Structure
+        """
+        SEQ_FIELDS = ["entries"]
+        def __init__(self, _io, _parent=None, _root=None):
+            super(RenderwareBinaryStream.Matrix, self).__init__(_io)
+            self._parent = _parent
+            self._root = _root
+            self._debug = collections.defaultdict(dict)
+
+        def _read(self):
+            self._debug['entries']['start'] = self._io.pos()
+            self._debug['entries']['arr'] = []
+            self.entries = []
+            for i in range(3):
+                self._debug['entries']['arr'].append({'start': self._io.pos()})
+                _t_entries = RenderwareBinaryStream.Vector3d(self._io, self, self._root)
+                try:
+                    _t_entries._read()
+                finally:
+                    self.entries.append(_t_entries)
+                self._debug['entries']['arr'][i]['end'] = self._io.pos()
+
+            self._debug['entries']['end'] = self._io.pos()
+
+
+        def _fetch_instances(self):
+            pass
+            for i in range(len(self.entries)):
+                pass
+                self.entries[i]._fetch_instances()
+
+
+
+    class MorphTarget(KaitaiStruct):
+        SEQ_FIELDS = ["bounding_sphere", "has_vertices", "has_normals", "vertices", "normals"]
+        def __init__(self, _io, _parent=None, _root=None):
+            super(RenderwareBinaryStream.MorphTarget, self).__init__(_io)
+            self._parent = _parent
+            self._root = _root
+            self._debug = collections.defaultdict(dict)
+
+        def _read(self):
+            self._debug['bounding_sphere']['start'] = self._io.pos()
+            self.bounding_sphere = RenderwareBinaryStream.Sphere(self._io, self, self._root)
+            self.bounding_sphere._read()
+            self._debug['bounding_sphere']['end'] = self._io.pos()
+            self._debug['has_vertices']['start'] = self._io.pos()
+            self.has_vertices = self._io.read_u4le()
+            self._debug['has_vertices']['end'] = self._io.pos()
+            self._debug['has_normals']['start'] = self._io.pos()
+            self.has_normals = self._io.read_u4le()
+            self._debug['has_normals']['end'] = self._io.pos()
+            if self.has_vertices != 0:
+                pass
+                self._debug['vertices']['start'] = self._io.pos()
+                self._debug['vertices']['arr'] = []
+                self.vertices = []
+                for i in range(self._parent.num_vertices):
+                    self._debug['vertices']['arr'].append({'start': self._io.pos()})
+                    _t_vertices = RenderwareBinaryStream.Vector3d(self._io, self, self._root)
+                    try:
+                        _t_vertices._read()
+                    finally:
+                        self.vertices.append(_t_vertices)
+                    self._debug['vertices']['arr'][i]['end'] = self._io.pos()
+
+                self._debug['vertices']['end'] = self._io.pos()
+
+            if self.has_normals != 0:
+                pass
+                self._debug['normals']['start'] = self._io.pos()
+                self._debug['normals']['arr'] = []
+                self.normals = []
+                for i in range(self._parent.num_vertices):
+                    self._debug['normals']['arr'].append({'start': self._io.pos()})
+                    _t_normals = RenderwareBinaryStream.Vector3d(self._io, self, self._root)
+                    try:
+                        _t_normals._read()
+                    finally:
+                        self.normals.append(_t_normals)
+                    self._debug['normals']['arr'][i]['end'] = self._io.pos()
+
+                self._debug['normals']['end'] = self._io.pos()
+
+
+
+        def _fetch_instances(self):
+            pass
+            self.bounding_sphere._fetch_instances()
+            if self.has_vertices != 0:
+                pass
+                for i in range(len(self.vertices)):
+                    pass
+                    self.vertices[i]._fetch_instances()
+
+
+            if self.has_normals != 0:
+                pass
+                for i in range(len(self.normals)):
+                    pass
+                    self.normals[i]._fetch_instances()
+
+
 
 
     class Rgba(KaitaiStruct):
         SEQ_FIELDS = ["r", "g", "b", "a"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.Rgba, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
@@ -459,12 +639,16 @@ class RenderwareBinaryStream(KaitaiStruct):
             self._debug['a']['end'] = self._io.pos()
 
 
+        def _fetch_instances(self):
+            pass
+
+
     class Sphere(KaitaiStruct):
         SEQ_FIELDS = ["x", "y", "z", "radius"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.Sphere, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
@@ -482,53 +666,8 @@ class RenderwareBinaryStream(KaitaiStruct):
             self._debug['radius']['end'] = self._io.pos()
 
 
-    class MorphTarget(KaitaiStruct):
-        SEQ_FIELDS = ["bounding_sphere", "has_vertices", "has_normals", "vertices", "normals"]
-        def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
-            self._parent = _parent
-            self._root = _root if _root else self
-            self._debug = collections.defaultdict(dict)
-
-        def _read(self):
-            self._debug['bounding_sphere']['start'] = self._io.pos()
-            self.bounding_sphere = RenderwareBinaryStream.Sphere(self._io, self, self._root)
-            self.bounding_sphere._read()
-            self._debug['bounding_sphere']['end'] = self._io.pos()
-            self._debug['has_vertices']['start'] = self._io.pos()
-            self.has_vertices = self._io.read_u4le()
-            self._debug['has_vertices']['end'] = self._io.pos()
-            self._debug['has_normals']['start'] = self._io.pos()
-            self.has_normals = self._io.read_u4le()
-            self._debug['has_normals']['end'] = self._io.pos()
-            if self.has_vertices != 0:
-                self._debug['vertices']['start'] = self._io.pos()
-                self.vertices = [None] * (self._parent.num_vertices)
-                for i in range(self._parent.num_vertices):
-                    if not 'arr' in self._debug['vertices']:
-                        self._debug['vertices']['arr'] = []
-                    self._debug['vertices']['arr'].append({'start': self._io.pos()})
-                    _t_vertices = RenderwareBinaryStream.Vector3d(self._io, self, self._root)
-                    _t_vertices._read()
-                    self.vertices[i] = _t_vertices
-                    self._debug['vertices']['arr'][i]['end'] = self._io.pos()
-
-                self._debug['vertices']['end'] = self._io.pos()
-
-            if self.has_normals != 0:
-                self._debug['normals']['start'] = self._io.pos()
-                self.normals = [None] * (self._parent.num_vertices)
-                for i in range(self._parent.num_vertices):
-                    if not 'arr' in self._debug['normals']:
-                        self._debug['normals']['arr'] = []
-                    self._debug['normals']['arr'].append({'start': self._io.pos()})
-                    _t_normals = RenderwareBinaryStream.Vector3d(self._io, self, self._root)
-                    _t_normals._read()
-                    self.normals[i] = _t_normals
-                    self._debug['normals']['arr'][i]['end'] = self._io.pos()
-
-                self._debug['normals']['end'] = self._io.pos()
-
+        def _fetch_instances(self):
+            pass
 
 
     class StructAtomic(KaitaiStruct):
@@ -538,9 +677,9 @@ class RenderwareBinaryStream(KaitaiStruct):
         """
         SEQ_FIELDS = ["frame_index", "geometry_index", "flag_render", "_unnamed3", "flag_collision_test", "_unnamed5", "unused"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.StructAtomic, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
@@ -562,10 +701,250 @@ class RenderwareBinaryStream(KaitaiStruct):
             self._debug['_unnamed5']['start'] = self._io.pos()
             self._unnamed5 = self._io.read_bits_int_le(29)
             self._debug['_unnamed5']['end'] = self._io.pos()
-            self._io.align_to_byte()
             self._debug['unused']['start'] = self._io.pos()
             self.unused = self._io.read_u4le()
             self._debug['unused']['end'] = self._io.pos()
+
+
+        def _fetch_instances(self):
+            pass
+
+
+    class StructClump(KaitaiStruct):
+        """
+        .. seealso::
+           Source - https://gtamods.com/wiki/RpClump
+        """
+        SEQ_FIELDS = ["num_atomics", "num_lights", "num_cameras"]
+        def __init__(self, _io, _parent=None, _root=None):
+            super(RenderwareBinaryStream.StructClump, self).__init__(_io)
+            self._parent = _parent
+            self._root = _root
+            self._debug = collections.defaultdict(dict)
+
+        def _read(self):
+            self._debug['num_atomics']['start'] = self._io.pos()
+            self.num_atomics = self._io.read_u4le()
+            self._debug['num_atomics']['end'] = self._io.pos()
+            if self._parent.version >= 208896:
+                pass
+                self._debug['num_lights']['start'] = self._io.pos()
+                self.num_lights = self._io.read_u4le()
+                self._debug['num_lights']['end'] = self._io.pos()
+
+            if self._parent.version >= 208896:
+                pass
+                self._debug['num_cameras']['start'] = self._io.pos()
+                self.num_cameras = self._io.read_u4le()
+                self._debug['num_cameras']['end'] = self._io.pos()
+
+
+
+        def _fetch_instances(self):
+            pass
+            if self._parent.version >= 208896:
+                pass
+
+            if self._parent.version >= 208896:
+                pass
+
+
+
+    class StructFrameList(KaitaiStruct):
+        """
+        .. seealso::
+           Source - https://gtamods.com/wiki/Frame_List_(RW_Section)#Structure
+        """
+        SEQ_FIELDS = ["num_frames", "frames"]
+        def __init__(self, _io, _parent=None, _root=None):
+            super(RenderwareBinaryStream.StructFrameList, self).__init__(_io)
+            self._parent = _parent
+            self._root = _root
+            self._debug = collections.defaultdict(dict)
+
+        def _read(self):
+            self._debug['num_frames']['start'] = self._io.pos()
+            self.num_frames = self._io.read_u4le()
+            self._debug['num_frames']['end'] = self._io.pos()
+            self._debug['frames']['start'] = self._io.pos()
+            self._debug['frames']['arr'] = []
+            self.frames = []
+            for i in range(self.num_frames):
+                self._debug['frames']['arr'].append({'start': self._io.pos()})
+                _t_frames = RenderwareBinaryStream.Frame(self._io, self, self._root)
+                try:
+                    _t_frames._read()
+                finally:
+                    self.frames.append(_t_frames)
+                self._debug['frames']['arr'][i]['end'] = self._io.pos()
+
+            self._debug['frames']['end'] = self._io.pos()
+
+
+        def _fetch_instances(self):
+            pass
+            for i in range(len(self.frames)):
+                pass
+                self.frames[i]._fetch_instances()
+
+
+
+    class StructGeometry(KaitaiStruct):
+        """
+        .. seealso::
+           Source - https://gtamods.com/wiki/RpGeometry
+        """
+        SEQ_FIELDS = ["format", "num_triangles", "num_vertices", "num_morph_targets", "surf_prop", "geometry", "morph_targets"]
+        def __init__(self, _io, _parent=None, _root=None):
+            super(RenderwareBinaryStream.StructGeometry, self).__init__(_io)
+            self._parent = _parent
+            self._root = _root
+            self._debug = collections.defaultdict(dict)
+
+        def _read(self):
+            self._debug['format']['start'] = self._io.pos()
+            self.format = self._io.read_u4le()
+            self._debug['format']['end'] = self._io.pos()
+            self._debug['num_triangles']['start'] = self._io.pos()
+            self.num_triangles = self._io.read_u4le()
+            self._debug['num_triangles']['end'] = self._io.pos()
+            self._debug['num_vertices']['start'] = self._io.pos()
+            self.num_vertices = self._io.read_u4le()
+            self._debug['num_vertices']['end'] = self._io.pos()
+            self._debug['num_morph_targets']['start'] = self._io.pos()
+            self.num_morph_targets = self._io.read_u4le()
+            self._debug['num_morph_targets']['end'] = self._io.pos()
+            if self._parent.version < 212992:
+                pass
+                self._debug['surf_prop']['start'] = self._io.pos()
+                self.surf_prop = RenderwareBinaryStream.SurfaceProperties(self._io, self, self._root)
+                self.surf_prop._read()
+                self._debug['surf_prop']['end'] = self._io.pos()
+
+            if (not (self.is_native)):
+                pass
+                self._debug['geometry']['start'] = self._io.pos()
+                self.geometry = RenderwareBinaryStream.GeometryNonNative(self._io, self, self._root)
+                self.geometry._read()
+                self._debug['geometry']['end'] = self._io.pos()
+
+            self._debug['morph_targets']['start'] = self._io.pos()
+            self._debug['morph_targets']['arr'] = []
+            self.morph_targets = []
+            for i in range(self.num_morph_targets):
+                self._debug['morph_targets']['arr'].append({'start': self._io.pos()})
+                _t_morph_targets = RenderwareBinaryStream.MorphTarget(self._io, self, self._root)
+                try:
+                    _t_morph_targets._read()
+                finally:
+                    self.morph_targets.append(_t_morph_targets)
+                self._debug['morph_targets']['arr'][i]['end'] = self._io.pos()
+
+            self._debug['morph_targets']['end'] = self._io.pos()
+
+
+        def _fetch_instances(self):
+            pass
+            if self._parent.version < 212992:
+                pass
+                self.surf_prop._fetch_instances()
+
+            if (not (self.is_native)):
+                pass
+                self.geometry._fetch_instances()
+
+            for i in range(len(self.morph_targets)):
+                pass
+                self.morph_targets[i]._fetch_instances()
+
+
+        @property
+        def is_native(self):
+            if hasattr(self, '_m_is_native'):
+                return self._m_is_native
+
+            self._m_is_native = self.format & 16777216 != 0
+            return getattr(self, '_m_is_native', None)
+
+        @property
+        def is_prelit(self):
+            if hasattr(self, '_m_is_prelit'):
+                return self._m_is_prelit
+
+            self._m_is_prelit = self.format & 8 != 0
+            return getattr(self, '_m_is_prelit', None)
+
+        @property
+        def is_textured(self):
+            if hasattr(self, '_m_is_textured'):
+                return self._m_is_textured
+
+            self._m_is_textured = self.format & 4 != 0
+            return getattr(self, '_m_is_textured', None)
+
+        @property
+        def is_textured2(self):
+            if hasattr(self, '_m_is_textured2'):
+                return self._m_is_textured2
+
+            self._m_is_textured2 = self.format & 128 != 0
+            return getattr(self, '_m_is_textured2', None)
+
+        @property
+        def num_uv_layers(self):
+            if hasattr(self, '_m_num_uv_layers'):
+                return self._m_num_uv_layers
+
+            self._m_num_uv_layers = ((2 if self.is_textured2 else (1 if self.is_textured else 0)) if self.num_uv_layers_raw == 0 else self.num_uv_layers_raw)
+            return getattr(self, '_m_num_uv_layers', None)
+
+        @property
+        def num_uv_layers_raw(self):
+            if hasattr(self, '_m_num_uv_layers_raw'):
+                return self._m_num_uv_layers_raw
+
+            self._m_num_uv_layers_raw = (self.format & 16711680) >> 16
+            return getattr(self, '_m_num_uv_layers_raw', None)
+
+
+    class StructGeometryList(KaitaiStruct):
+        """
+        .. seealso::
+           Source - https://gtamods.com/wiki/Geometry_List_(RW_Section)#Structure
+        """
+        SEQ_FIELDS = ["num_geometries"]
+        def __init__(self, _io, _parent=None, _root=None):
+            super(RenderwareBinaryStream.StructGeometryList, self).__init__(_io)
+            self._parent = _parent
+            self._root = _root
+            self._debug = collections.defaultdict(dict)
+
+        def _read(self):
+            self._debug['num_geometries']['start'] = self._io.pos()
+            self.num_geometries = self._io.read_u4le()
+            self._debug['num_geometries']['end'] = self._io.pos()
+
+
+        def _fetch_instances(self):
+            pass
+
+
+    class StructTextureDictionary(KaitaiStruct):
+        SEQ_FIELDS = ["num_textures"]
+        def __init__(self, _io, _parent=None, _root=None):
+            super(RenderwareBinaryStream.StructTextureDictionary, self).__init__(_io)
+            self._parent = _parent
+            self._root = _root
+            self._debug = collections.defaultdict(dict)
+
+        def _read(self):
+            self._debug['num_textures']['start'] = self._io.pos()
+            self.num_textures = self._io.read_u4le()
+            self._debug['num_textures']['end'] = self._io.pos()
+
+
+        def _fetch_instances(self):
+            pass
 
 
     class SurfaceProperties(KaitaiStruct):
@@ -575,9 +954,9 @@ class RenderwareBinaryStream(KaitaiStruct):
         """
         SEQ_FIELDS = ["ambient", "specular", "diffuse"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.SurfaceProperties, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
@@ -592,179 +971,37 @@ class RenderwareBinaryStream(KaitaiStruct):
             self._debug['diffuse']['end'] = self._io.pos()
 
 
-    class StructFrameList(KaitaiStruct):
-        """
-        .. seealso::
-           Source - https://gtamods.com/wiki/Frame_List_(RW_Section)#Structure
-        """
-        SEQ_FIELDS = ["num_frames", "frames"]
+        def _fetch_instances(self):
+            pass
+
+
+    class TexCoord(KaitaiStruct):
+        SEQ_FIELDS = ["u", "v"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.TexCoord, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
-            self._debug['num_frames']['start'] = self._io.pos()
-            self.num_frames = self._io.read_u4le()
-            self._debug['num_frames']['end'] = self._io.pos()
-            self._debug['frames']['start'] = self._io.pos()
-            self.frames = [None] * (self.num_frames)
-            for i in range(self.num_frames):
-                if not 'arr' in self._debug['frames']:
-                    self._debug['frames']['arr'] = []
-                self._debug['frames']['arr'].append({'start': self._io.pos()})
-                _t_frames = RenderwareBinaryStream.Frame(self._io, self, self._root)
-                _t_frames._read()
-                self.frames[i] = _t_frames
-                self._debug['frames']['arr'][i]['end'] = self._io.pos()
-
-            self._debug['frames']['end'] = self._io.pos()
+            self._debug['u']['start'] = self._io.pos()
+            self.u = self._io.read_f4le()
+            self._debug['u']['end'] = self._io.pos()
+            self._debug['v']['start'] = self._io.pos()
+            self.v = self._io.read_f4le()
+            self._debug['v']['end'] = self._io.pos()
 
 
-    class Matrix(KaitaiStruct):
-        """
-        .. seealso::
-           Source - https://gtamods.com/wiki/Frame_List_(RW_Section)#Structure
-        """
-        SEQ_FIELDS = ["entries"]
-        def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
-            self._parent = _parent
-            self._root = _root if _root else self
-            self._debug = collections.defaultdict(dict)
-
-        def _read(self):
-            self._debug['entries']['start'] = self._io.pos()
-            self.entries = [None] * (3)
-            for i in range(3):
-                if not 'arr' in self._debug['entries']:
-                    self._debug['entries']['arr'] = []
-                self._debug['entries']['arr'].append({'start': self._io.pos()})
-                _t_entries = RenderwareBinaryStream.Vector3d(self._io, self, self._root)
-                _t_entries._read()
-                self.entries[i] = _t_entries
-                self._debug['entries']['arr'][i]['end'] = self._io.pos()
-
-            self._debug['entries']['end'] = self._io.pos()
-
-
-    class Vector3d(KaitaiStruct):
-        """
-        .. seealso::
-           Source - https://gtamods.com/wiki/Frame_List_(RW_Section)#Structure
-        """
-        SEQ_FIELDS = ["x", "y", "z"]
-        def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
-            self._parent = _parent
-            self._root = _root if _root else self
-            self._debug = collections.defaultdict(dict)
-
-        def _read(self):
-            self._debug['x']['start'] = self._io.pos()
-            self.x = self._io.read_f4le()
-            self._debug['x']['end'] = self._io.pos()
-            self._debug['y']['start'] = self._io.pos()
-            self.y = self._io.read_f4le()
-            self._debug['y']['end'] = self._io.pos()
-            self._debug['z']['start'] = self._io.pos()
-            self.z = self._io.read_f4le()
-            self._debug['z']['end'] = self._io.pos()
-
-
-    class ListWithHeader(KaitaiStruct):
-        """Typical structure used by many data types in RenderWare binary
-        stream. Substream contains a list of binary stream entries,
-        first entry always has type "struct" and carries some specific
-        binary data it in, determined by the type of parent. All other
-        entries, beside the first one, are normal, self-describing
-        records.
-        """
-        SEQ_FIELDS = ["code", "header_size", "library_id_stamp", "header", "entries"]
-        def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
-            self._parent = _parent
-            self._root = _root if _root else self
-            self._debug = collections.defaultdict(dict)
-
-        def _read(self):
-            self._debug['code']['start'] = self._io.pos()
-            self.code = self._io.read_bytes(4)
-            self._debug['code']['end'] = self._io.pos()
-            if not self.code == b"\x01\x00\x00\x00":
-                raise kaitaistruct.ValidationNotEqualError(b"\x01\x00\x00\x00", self.code, self._io, u"/types/list_with_header/seq/0")
-            self._debug['header_size']['start'] = self._io.pos()
-            self.header_size = self._io.read_u4le()
-            self._debug['header_size']['end'] = self._io.pos()
-            self._debug['library_id_stamp']['start'] = self._io.pos()
-            self.library_id_stamp = self._io.read_u4le()
-            self._debug['library_id_stamp']['end'] = self._io.pos()
-            self._debug['header']['start'] = self._io.pos()
-            _on = self._parent.code
-            if _on == RenderwareBinaryStream.Sections.atomic:
-                self._raw_header = self._io.read_bytes(self.header_size)
-                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
-                self.header = RenderwareBinaryStream.StructAtomic(_io__raw_header, self, self._root)
-                self.header._read()
-            elif _on == RenderwareBinaryStream.Sections.geometry:
-                self._raw_header = self._io.read_bytes(self.header_size)
-                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
-                self.header = RenderwareBinaryStream.StructGeometry(_io__raw_header, self, self._root)
-                self.header._read()
-            elif _on == RenderwareBinaryStream.Sections.texture_dictionary:
-                self._raw_header = self._io.read_bytes(self.header_size)
-                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
-                self.header = RenderwareBinaryStream.StructTextureDictionary(_io__raw_header, self, self._root)
-                self.header._read()
-            elif _on == RenderwareBinaryStream.Sections.geometry_list:
-                self._raw_header = self._io.read_bytes(self.header_size)
-                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
-                self.header = RenderwareBinaryStream.StructGeometryList(_io__raw_header, self, self._root)
-                self.header._read()
-            elif _on == RenderwareBinaryStream.Sections.clump:
-                self._raw_header = self._io.read_bytes(self.header_size)
-                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
-                self.header = RenderwareBinaryStream.StructClump(_io__raw_header, self, self._root)
-                self.header._read()
-            elif _on == RenderwareBinaryStream.Sections.frame_list:
-                self._raw_header = self._io.read_bytes(self.header_size)
-                _io__raw_header = KaitaiStream(BytesIO(self._raw_header))
-                self.header = RenderwareBinaryStream.StructFrameList(_io__raw_header, self, self._root)
-                self.header._read()
-            else:
-                self.header = self._io.read_bytes(self.header_size)
-            self._debug['header']['end'] = self._io.pos()
-            self._debug['entries']['start'] = self._io.pos()
-            self.entries = []
-            i = 0
-            while not self._io.is_eof():
-                if not 'arr' in self._debug['entries']:
-                    self._debug['entries']['arr'] = []
-                self._debug['entries']['arr'].append({'start': self._io.pos()})
-                _t_entries = RenderwareBinaryStream(self._io)
-                _t_entries._read()
-                self.entries.append(_t_entries)
-                self._debug['entries']['arr'][len(self.entries) - 1]['end'] = self._io.pos()
-                i += 1
-
-            self._debug['entries']['end'] = self._io.pos()
-
-        @property
-        def version(self):
-            if hasattr(self, '_m_version'):
-                return self._m_version if hasattr(self, '_m_version') else None
-
-            self._m_version = (((((self.library_id_stamp >> 14) & 261888) + 196608) | ((self.library_id_stamp >> 16) & 63)) if (self.library_id_stamp & 4294901760) != 0 else (self.library_id_stamp << 8))
-            return self._m_version if hasattr(self, '_m_version') else None
+        def _fetch_instances(self):
+            pass
 
 
     class Triangle(KaitaiStruct):
         SEQ_FIELDS = ["vertex2", "vertex1", "material_id", "vertex3"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.Triangle, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
@@ -782,96 +1019,77 @@ class RenderwareBinaryStream(KaitaiStruct):
             self._debug['vertex3']['end'] = self._io.pos()
 
 
-    class Frame(KaitaiStruct):
-        """
-        .. seealso::
-           Source - https://gtamods.com/wiki/Frame_List_(RW_Section)#Structure
-        """
-        SEQ_FIELDS = ["rotation_matrix", "position", "cur_frame_idx", "matrix_creation_flags"]
-        def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
-            self._parent = _parent
-            self._root = _root if _root else self
-            self._debug = collections.defaultdict(dict)
-
-        def _read(self):
-            self._debug['rotation_matrix']['start'] = self._io.pos()
-            self.rotation_matrix = RenderwareBinaryStream.Matrix(self._io, self, self._root)
-            self.rotation_matrix._read()
-            self._debug['rotation_matrix']['end'] = self._io.pos()
-            self._debug['position']['start'] = self._io.pos()
-            self.position = RenderwareBinaryStream.Vector3d(self._io, self, self._root)
-            self.position._read()
-            self._debug['position']['end'] = self._io.pos()
-            self._debug['cur_frame_idx']['start'] = self._io.pos()
-            self.cur_frame_idx = self._io.read_s4le()
-            self._debug['cur_frame_idx']['end'] = self._io.pos()
-            self._debug['matrix_creation_flags']['start'] = self._io.pos()
-            self.matrix_creation_flags = self._io.read_u4le()
-            self._debug['matrix_creation_flags']['end'] = self._io.pos()
-
-
-    class TexCoord(KaitaiStruct):
-        SEQ_FIELDS = ["u", "v"]
-        def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
-            self._parent = _parent
-            self._root = _root if _root else self
-            self._debug = collections.defaultdict(dict)
-
-        def _read(self):
-            self._debug['u']['start'] = self._io.pos()
-            self.u = self._io.read_f4le()
-            self._debug['u']['end'] = self._io.pos()
-            self._debug['v']['start'] = self._io.pos()
-            self.v = self._io.read_f4le()
-            self._debug['v']['end'] = self._io.pos()
+        def _fetch_instances(self):
+            pass
 
 
     class UvLayer(KaitaiStruct):
         SEQ_FIELDS = ["tex_coords"]
         def __init__(self, num_vertices, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.UvLayer, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self.num_vertices = num_vertices
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
             self._debug['tex_coords']['start'] = self._io.pos()
-            self.tex_coords = [None] * (self.num_vertices)
+            self._debug['tex_coords']['arr'] = []
+            self.tex_coords = []
             for i in range(self.num_vertices):
-                if not 'arr' in self._debug['tex_coords']:
-                    self._debug['tex_coords']['arr'] = []
                 self._debug['tex_coords']['arr'].append({'start': self._io.pos()})
                 _t_tex_coords = RenderwareBinaryStream.TexCoord(self._io, self, self._root)
-                _t_tex_coords._read()
-                self.tex_coords[i] = _t_tex_coords
+                try:
+                    _t_tex_coords._read()
+                finally:
+                    self.tex_coords.append(_t_tex_coords)
                 self._debug['tex_coords']['arr'][i]['end'] = self._io.pos()
 
             self._debug['tex_coords']['end'] = self._io.pos()
 
 
-    class StructTextureDictionary(KaitaiStruct):
-        SEQ_FIELDS = ["num_textures"]
+        def _fetch_instances(self):
+            pass
+            for i in range(len(self.tex_coords)):
+                pass
+                self.tex_coords[i]._fetch_instances()
+
+
+
+    class Vector3d(KaitaiStruct):
+        """
+        .. seealso::
+           Source - https://gtamods.com/wiki/Frame_List_(RW_Section)#Structure
+        """
+        SEQ_FIELDS = ["x", "y", "z"]
         def __init__(self, _io, _parent=None, _root=None):
-            self._io = _io
+            super(RenderwareBinaryStream.Vector3d, self).__init__(_io)
             self._parent = _parent
-            self._root = _root if _root else self
+            self._root = _root
             self._debug = collections.defaultdict(dict)
 
         def _read(self):
-            self._debug['num_textures']['start'] = self._io.pos()
-            self.num_textures = self._io.read_u4le()
-            self._debug['num_textures']['end'] = self._io.pos()
+            self._debug['x']['start'] = self._io.pos()
+            self.x = self._io.read_f4le()
+            self._debug['x']['end'] = self._io.pos()
+            self._debug['y']['start'] = self._io.pos()
+            self.y = self._io.read_f4le()
+            self._debug['y']['end'] = self._io.pos()
+            self._debug['z']['start'] = self._io.pos()
+            self.z = self._io.read_f4le()
+            self._debug['z']['end'] = self._io.pos()
+
+
+        def _fetch_instances(self):
+            pass
 
 
     @property
     def version(self):
         if hasattr(self, '_m_version'):
-            return self._m_version if hasattr(self, '_m_version') else None
+            return self._m_version
 
-        self._m_version = (((((self.library_id_stamp >> 14) & 261888) + 196608) | ((self.library_id_stamp >> 16) & 63)) if (self.library_id_stamp & 4294901760) != 0 else (self.library_id_stamp << 8))
-        return self._m_version if hasattr(self, '_m_version') else None
+        self._m_version = ((self.library_id_stamp >> 14 & 261888) + 196608 | self.library_id_stamp >> 16 & 63 if self.library_id_stamp & 4294901760 != 0 else self.library_id_stamp << 8)
+        return getattr(self, '_m_version', None)
 
 
