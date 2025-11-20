@@ -36,11 +36,11 @@ setup(
         "jinja2>=2.1.0",
         "kaitaistruct~=0.10",
         "networkx>=2.6.3",
-        "pdfminer.six>=20220524,<=20250506",
         "Pillow>=5.0.0",
         "pyreadline3;platform_system=='Windows'",
         "pyyaml>=3.13",
-        "setuptools>=80.9.0"
+        "setuptools>=80.9.0",
+        "pdfminer.six"
     ],
     extras_require={
         'demangle': ['cxxfilt'],
